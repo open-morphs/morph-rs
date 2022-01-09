@@ -1,0 +1,16 @@
+[package]
+name = "morph-rs"
+version = "0.1.0"
+description = "Rust library for interfacing with the Morph earbuds, and charging case."
+readme = "README.md"
+keywords = ["earbuds", "bluetooth"]
+categories = ["earbuds", "bluetooth"]
+authors = ["Dom Rodriguez <shymega@shymega.org.uk>"]
+edition = "2021"
+publish = false
+license = "MIT"
+repository = "https://github.com/morph-audio/morph-rs.git"
+homepage = "https://github.com/morph-audio/morph-rs"
+
+[dependencies]
+btleplug = { version = "0.9.0", features = ["serde"] }
