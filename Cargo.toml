@@ -13,4 +13,6 @@ repository = "https://github.com/morph-audio/morph-rs.git"
 homepage = "https://github.com/morph-audio/morph-rs"
 
 [dependencies]
+serde = { version = "1.0.137", features = ["derive"] }
+log = "0.4.17"
 btleplug = { version = "0.9.2", features = ["serde"] }
