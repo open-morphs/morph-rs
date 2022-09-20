@@ -14,13 +14,10 @@ homepage = "https://github.com/morph-audio/morph-rs"
 
 [features]
 default = []
-linux = ["bluer"]
-macos = []
-windows = []
+linux-support = []
+macos-support = []
+windows-support = []
 
 [dependencies]
 serde = { version = "1.0.138", features = ["derive"] }
-
-[target.'cfg(target_os = "linux")'.dependencies]
-bluer = { version = "0.15.0", features = [ "rfcomm" ], optional = true }
-
+btleplug = { version = "*", features = [ "serde" ] }
