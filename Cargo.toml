@@ -21,3 +21,4 @@ windows-support = []
 [dependencies]
 serde = { version = "1.0.138", features = ["derive"] }
 btleplug = { version = "*", features = [ "serde" ] }
+tokio = { version = "*", features = [ "full" ] } 
