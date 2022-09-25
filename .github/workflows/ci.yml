@@ -1,0 +1,51 @@
+name: CI testing workflow
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: "Run tests on OS: ${{ matrix.os }}, channel: ${{ matrix.channel }}"
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        channel:
+          - stable
+          - beta
+          - nightly
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+      - name: Initialize Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.channel }}
+          profile: minimal
+          components: clippy
+          override: true
+          default: true
+      - name: Install D-Bus libraries if running on Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y libdbus-1-dev
+      - name: Build project
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --verbose
+      - name: Run tests on project
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          args: --verbose
+      - name: Run clippy on project
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --verbose
