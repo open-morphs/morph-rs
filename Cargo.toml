@@ -16,6 +16,6 @@ homepage = "https://github.com/morph-audio/morph-rs"
 default = []
 
 [dependencies]
-serde = { version = "1.0.138", features = ["derive"] }
-btleplug = { version = "*", features = [ "serde" ] }
-tokio = { version = "*", features = [ "full" ] } 
+serde = { version = "1.0.145", features = ["derive"] }
+btleplug = { version = "0.10.1", features = [ "serde" ] }
+tokio = { version = "1.21.1", features = [ "full" ] } 
