@@ -14,3 +14,5 @@
     unused_extern_crates,
     variant_size_differences
 )]
+
+pub mod commands;
