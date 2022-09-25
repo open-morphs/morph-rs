@@ -14,9 +14,6 @@ homepage = "https://github.com/morph-audio/morph-rs"
 
 [features]
 default = []
-linux-support = []
-macos-support = []
-windows-support = []
 
 [dependencies]
 serde = { version = "1.0.138", features = ["derive"] }
