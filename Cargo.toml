@@ -1,7 +1,7 @@
 [package]
 name = "morph-rs"
 version = "0.1.0"
-description = "Rust library for interfacing with the Morph InfiniConnect earbuds, and charging case."
+description = "Rust library for interfacing with the Morph InfiniConnect earbuds."
 readme = "README.md"
 keywords = ["earbuds", "bluetooth"]
 categories = ["earbuds", "bluetooth"]
