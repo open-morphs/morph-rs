@@ -46,4 +46,26 @@ impl Display for EarbudsKind {
         write!(f, "{}", self.full_name())
     }
 }
+
+/// Enum of BLE Protocol Data Unit types.
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+pub enum PduKind {
+    /// Command PDU.
+    Command = 0x0,
+    /// Notification PDU.
+    Notification = 0x1,
+    /// Response PDU.
+    Response = 0x10,
+    /// Error PDU.
+    Error = 0x11,
+    /// Undefined PDU type.
+    Undefined,
+}
+
+impl Default for PduKind {
+    fn default() -> Self {
+        Self::Undefined
+    }
+}
+
 pub mod commands;
