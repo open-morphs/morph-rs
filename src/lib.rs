@@ -15,4 +15,35 @@
     variant_size_differences
 )]
 
+use std::fmt::Display;
+
+/// Enum of different variants of the Morph Earbuds.
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+pub enum EarbudsKind {
+    /// V1 is the first iteration of the Morph BLE earbuds.
+    V1,
+    /// Undefined earbuds - default type.
+    Undefined,
+}
+
+impl EarbudsKind {
+    fn full_name(&self) -> &'static str {
+        match *self {
+            EarbudsKind::V1 => "Morph InfiniConnect v1",
+            EarbudsKind::Undefined => "Undefined model (default variant).",
+        }
+    }
+}
+
+impl Default for EarbudsKind {
+    fn default() -> Self {
+        Self::Undefined
+    }
+}
+
+impl Display for EarbudsKind {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.full_name())
+    }
+}
 pub mod commands;
