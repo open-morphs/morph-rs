@@ -63,11 +63,12 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .find(|cmd| cmd.uuid == command)
         .expect("Unable to find cmd.");
 
+    let payload = vec![0x0a, 0x66, 0x00, 0x0E, 0x03];
     dbg!("PLAY TONE!");
     morphs
         .write(
             &cmd_char,
-            &vec![0xa, 0x66, 0x00, 0x0E, 0x03],
+            &payload,
             btleplug::api::WriteType::WithoutResponse,
         )
         .await?;
