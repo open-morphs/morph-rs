@@ -17,7 +17,7 @@ async fn find_morphs(central: &Adapter) -> Option<Peripheral> {
             .unwrap()
             .local_name
             .iter()
-            .any(|name| name.contains("Morph"))
+            .any(|name| name.contains("LE-Morph"))
         {
             return Some(p);
         }
