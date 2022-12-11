@@ -1,6 +1,5 @@
 //! Base module for the `morph-rs` crate.
 #![deny(
-    warnings,
     missing_copy_implementations,
     missing_debug_implementations,
     missing_docs,
