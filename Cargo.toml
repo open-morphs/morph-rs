@@ -20,9 +20,9 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 default = []
 
 [dependencies]
-btleplug = { version = "0.10.1", features = ["serde"] }
-futures = "0.3.24"
-serde = { version = "1.0.145", features = ["derive"] }
-tokio = { version = "1.21.1", features = ["full"] } 
-uuid = { version = "1.1.2", features = ["v4"] }
+btleplug = { version = "0.10.4", features = ["serde"] }
+futures = "0.3.25"
+serde = { version = "1.0.149", features = ["derive"] }
+tokio = { version = "1.23.0", features = ["full"] } 
+uuid = { version = "1.2.2", features = ["v4"] }
 flutter_rust_bridge = "*"
