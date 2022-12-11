@@ -93,3 +93,5 @@ impl Default for PduKind {
         Self::Undefined
     }
 }
+
+mod bridge_generated;
