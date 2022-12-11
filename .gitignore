@@ -120,3 +120,7 @@ fabric.properties
 Cargo.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/rust
+
+# Ignore helper FFI modules
+src/bridge_generated.rs
+src/bridge_generated.io.rs
