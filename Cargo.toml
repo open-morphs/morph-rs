@@ -22,7 +22,7 @@ default = []
 [dependencies]
 btleplug = { version = "0.10.4", features = ["serde"] }
 futures = "0.3.25"
-serde = { version = "1.0.149", features = ["derive"] }
+serde = { version = "1.0.151", features = ["derive"] }
 tokio = { version = "1.23.0", features = ["full"] } 
 uuid = { version = "1.2.2", features = ["v4"] }
-flutter_rust_bridge = "1.54.0"
+flutter_rust_bridge = "1.56.0"
