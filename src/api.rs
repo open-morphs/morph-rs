@@ -4,6 +4,7 @@ use std::fmt;
 
 /// Enum of different variants of the Morph Earbuds.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[repr(C)]
 pub enum EarbudsKind {
     /// V1 is the first iteration of the Morph BLE earbuds.
     V1,
@@ -38,6 +39,7 @@ pub mod features {
 
     /// This is an enum of commands for the earbuds.
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+    #[repr(C)]
     pub enum FeatureKind {
         /// Feature that can be sent to the earbuds, to check that the command handler is
         /// running.
@@ -60,6 +62,7 @@ pub mod features {
 
 /// Enum of BLE Protocol Data Unit types.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[repr(C)]
 pub enum PduKind {
     /// Command PDU.
     Command = 0x0,
