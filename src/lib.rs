@@ -14,4 +14,4 @@
     variant_size_differences
 )]
 
-mod api;
+pub mod api;
