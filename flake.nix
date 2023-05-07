@@ -1,44 +1,47 @@
-{
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.nci.url = "github:yusdacra/nix-cargo-integration";
-  inputs.nci.inputs.nixpkgs.follows = "nixpkgs";
-  inputs.parts.url = "github:hercules-ci/flake-parts";
-  inputs.parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+# SPDX-FileCopyrightText: 2021 Serokell <https://serokell.io/>
+#
+# SPDX-License-Identifier: CC0-1.0
 
-  outputs = inputs @ {
-    parts,
-    nci,
-    ...
-  }:
-    parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
-      imports = [nci.flakeModule];
-      perSystem = {
-        pkgs,
-        config,
-        ...
-      }: let
-        # TODO: change this to your crate's name
-        crateName = "morph_rs";
-        # shorthand for accessing this crate's outputs
-        # you can access crate outputs under `config.nci.outputs.<crate name>` (see documentation)
-        crateOutputs = config.nci.outputs.${crateName};
-      in {
-        # declare projects
-        # relPath is the relative path of a project to the flake root
-        # TODO: change this to your crate's path
-        nci.projects.${crateName}.relPath = "";
-        # configure crates
-        nci.crates.${crateName} = {
-          # export crate (packages and devshell) in flake outputs
-          # alternatively you can access the outputs and export them yourself (see below)
-          export = true;
-          # look at documentation for more options
-        };
-        # export the crate devshell as the default devshell
-        devShells.default = crateOutputs.devShell;
-        # export the release package of the crate as default package
-        packages.default = crateOutputs.packages.release;
-      };
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs";
+    crate2nix = {
+      url = "github:kolloch/crate2nix";
+      flake = false;
     };
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, crate2nix, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+
+        # DON'T FORGET TO PUT YOUR PACKAGE NAME HERE, REMOVING `throw`
+        crateName = "morph-rs";
+
+        inherit (import "${crate2nix}/tools.nix" { inherit pkgs; })
+          generatedCargoNix;
+
+        project = import (generatedCargoNix {
+          name = crateName;
+          src = ./.;
+        }) {
+          inherit pkgs;
+          defaultCrateOverrides = pkgs.defaultCrateOverrides // {
+            # Crate dependency overrides go here
+          };
+        };
+
+      in {
+        packages.${crateName} = project.rootCrate.build;
+
+        defaultPackage = self.packages.${system}.${crateName};
+
+        devShell = pkgs.mkShell {
+          inputsFrom = builtins.attrValues self.packages.${system};
+          buildInputs = [ pkgs.cargo pkgs.rust-analyzer pkgs.clippy
+          pkgs.pkg-config ];
+        };
+      });
 }
