@@ -55,3 +55,13 @@ impl Default for PduKind {
         Self::Undefined // Default variant.
     }
 }
+
+/// Enum of BLE vendors.
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[repr(C)]
+pub enum VendorKind {
+    /// Default vendor ID for Morphs.
+    Morph = 0x0a66,
+    /// What's this?
+    Todo = 0x001d,
+}
