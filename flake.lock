@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "crate2nix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1681086579,
-        "narHash": "sha256-MEcdG7EXkFsmrTo1/X5tq7UDFY6enHdl65k0wbTCuD0=",
-        "owner": "kolloch",
-        "repo": "crate2nix",
-        "rev": "1b042dab3928aaa37421a83d4e1023e7a79527e2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kolloch",
-        "repo": "crate2nix",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -34,26 +18,58 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "naersk": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1683477114,
-        "narHash": "sha256-9QjIuaqsHGVk/J+2gKiFd2ANzkuvLj0zYvWc8GWmKgQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "ccebd7e0fe8029d4a139e8dbbcf2cdfcd01cdf8c",
+        "lastModified": 1679567394,
+        "narHash": "sha256-ZvLuzPeARDLiQUt6zSZFGOs+HZmE+3g4QURc8mkBsfM=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "88cd22380154a2c36799fe8098888f0f59861a15",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1684280442,
+        "narHash": "sha256-nC1/kfh6tpMQSLQalbNTNnireIlxvLLugrjZdasNh+I=",
+        "path": "/nix/store/s205b5hmgrqz399mgyzwzqp2x6bz7k49-source",
+        "rev": "6c591e7adc514090a77209f56c9d0c551ab8530d",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1684393889,
+        "narHash": "sha256-X4EP3TdpskELgOKGfm7UcLLGheqxYJZuNEEc0HkmrO0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9f7d9a55cc9960c029b006444e64e8dfa54a578e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "crate2nix": "crate2nix",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "naersk": "naersk",
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {

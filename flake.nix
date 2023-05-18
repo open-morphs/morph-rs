@@ -1,47 +1,33 @@
-# SPDX-FileCopyrightText: 2021 Serokell <https://serokell.io/>
-#
-# SPDX-License-Identifier: CC0-1.0
-
+# SPDX-FileCopyrightText: Dom Rodriguez <shymega+toybox@shymega.org.uk>
+# SPDX-License-Identifier: GPL-3.0-or-later
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs";
-    crate2nix = {
-      url = "github:kolloch/crate2nix";
-      flake = false;
-    };
     flake-utils.url = "github:numtide/flake-utils";
+    naersk.url = "github:nix-community/naersk";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, crate2nix, flake-utils }:
+  outputs = { self, flake-utils, naersk, nixpkgs }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = (import nixpkgs) {
+          inherit system;
+        };
 
-        # DON'T FORGET TO PUT YOUR PACKAGE NAME HERE, REMOVING `throw`
-        crateName = "morph-rs";
+        naersk' = pkgs.callPackage naersk {};
 
-        inherit (import "${crate2nix}/tools.nix" { inherit pkgs; })
-          generatedCargoNix;
-
-        project = import (generatedCargoNix {
-          name = crateName;
+      in rec {
+        # For `nix build` & `nix run`:
+        defaultPackage = naersk'.buildPackage {
           src = ./.;
-        }) {
-          inherit pkgs;
-          defaultCrateOverrides = pkgs.defaultCrateOverrides // {
-            # Crate dependency overrides go here
-          };
+          nativeBuildInputs = with pkgs; [ pkg-config cmake ] ;
+          buildInputs = with pkgs; [ dbus.dev bluez ];
         };
 
-      in {
-        packages.${crateName} = project.rootCrate.build;
-
-        defaultPackage = self.packages.${system}.${crateName};
-
+        # For `nix develop`:
         devShell = pkgs.mkShell {
-          inputsFrom = builtins.attrValues self.packages.${system};
-          buildInputs = [ pkgs.cargo pkgs.rust-analyzer pkgs.clippy
-          pkgs.pkg-config ];
+          nativeBuildInputs = with pkgs; [ rustc cargo ];
         };
-      });
+      }
+    );
 }
