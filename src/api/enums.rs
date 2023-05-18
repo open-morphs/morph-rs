@@ -8,7 +8,7 @@ use std::fmt;
 #[repr(C)]
 pub enum EarbudsModel {
     /// V1 is the first iteration of the Morph BLE earbuds.
-    V1,
+    MorphEarbudsV1,
     /// Undefined earbuds model.
     Undefined,
 }
@@ -16,7 +16,7 @@ pub enum EarbudsModel {
 impl EarbudsModel {
     fn full_name(&self) -> &'static str {
         match *self {
-            EarbudsModel::V1 => "Morph InfiniConnect v1",
+            EarbudsModel::MorphEarbudsV1 => "Morph InfiniConnect v1",
             EarbudsModel::Undefined => "Undefined model.", // default variant.
         }
     }
