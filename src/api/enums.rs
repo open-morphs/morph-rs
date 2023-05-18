@@ -6,30 +6,30 @@ use std::fmt;
 /// Enum of different variants of the Morph Earbuds.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
-pub enum EarbudsModel {
+pub enum EarbudsKind {
     /// V1 is the first iteration of the Morph BLE earbuds.
     MorphEarbudsV1,
     /// Undefined earbuds model.
     Undefined,
 }
 
-impl EarbudsModel {
+impl EarbudsKind {
     fn full_name(&self) -> &'static str {
         match *self {
-            EarbudsModel::MorphEarbudsV1 => "Morph InfiniConnect v1",
-            EarbudsModel::Undefined => "Undefined model.", // default variant.
+            EarbudsKind::MorphEarbudsV1 => "Morph InfiniConnect v1",
+            EarbudsKind::Undefined => "Undefined model.", // default variant.
         }
     }
 }
 
-impl Default for EarbudsModel {
+impl Default for EarbudsKind {
     fn default() -> Self {
         Self::Undefined
     }
 }
 
-impl fmt::Display for EarbudsModel {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl fmt::Display for EarbudsKind {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.full_name())
     }
 }
@@ -37,7 +37,7 @@ impl fmt::Display for EarbudsModel {
 /// Enum of BLE Protocol Data Unit types.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
-pub enum PduType {
+pub enum PduKind {
     /// Command PDU.
     Command = 0x0,
     /// Notification PDU.
@@ -50,7 +50,7 @@ pub enum PduType {
     Undefined,
 }
 
-impl Default for PduType {
+impl Default for PduKind {
     fn default() -> Self {
         Self::Undefined // Default variant.
     }
