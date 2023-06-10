@@ -1,9 +1,7 @@
 //! Exports an enum of Morph Earbuds commands.
 
 /// This is an enum of commands for the earbuds.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[repr(C)]
-#[repr(i32)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FeatureKind {
     /// Feature that can be sent to the earbuds, to check that the command handler is
     /// running.
@@ -13,8 +11,7 @@ pub enum FeatureKind {
     /// (Possible range of volume is 0-0x7f, or 0-127 in decimal)
     GetVolume = 0x01,
     /// Change volume.
-    /// Accept payload, 0x40 is example. In hex.
-    SetVolume(i32) = 0x02,
+    SetVolume = 0x02,
     /// Toggle microphone mute.
     ToggleMicMute = 0x03,
     /// Get microphone state.
@@ -24,11 +21,6 @@ pub enum FeatureKind {
     /// Get connection status of headset.
     GetIsDeviceConnected = 0x06,
     /// Default variant.
+    #[default]
     Undefined,
-}
-
-impl Default for FeatureKind {
-    fn default() -> Self {
-        Self::Undefined // Default variant.
-    }
 }

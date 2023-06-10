@@ -3,13 +3,18 @@
 
 use std::fmt;
 
+mod features;
+
+pub use self::features::FeatureKind;
+
 /// Enum of different variants of the Morph Earbuds.
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum EarbudsKind {
     /// V1 is the first iteration of the Morph BLE earbuds.
     MorphEarbudsV1,
-    /// Undefined earbuds model.
+    /// Undefined.
+    #[default]
     Undefined,
 }
 
@@ -22,12 +27,6 @@ impl EarbudsKind {
     }
 }
 
-impl Default for EarbudsKind {
-    fn default() -> Self {
-        Self::Undefined
-    }
-}
-
 impl fmt::Display for EarbudsKind {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.full_name())
@@ -35,7 +34,7 @@ impl fmt::Display for EarbudsKind {
 }
 
 /// Enum of BLE Protocol Data Unit types.
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum PduKind {
     /// Command PDU.
@@ -47,21 +46,17 @@ pub enum PduKind {
     /// Error PDU.
     Error = 0x11,
     /// Default variant.
+    #[default]
     Undefined,
 }
 
-impl Default for PduKind {
-    fn default() -> Self {
-        Self::Undefined // Default variant.
-    }
-}
-
 /// Enum of BLE vendors.
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum VendorKind {
     /// Default vendor ID for Morphs.
+    #[default]
     Morph = 0x0a66,
-    /// What's this?
-    Todo = 0x001d,
+    /// QCC placeholder.
+    Qcc = 0x001d,
 }

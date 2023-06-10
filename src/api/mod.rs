@@ -1,7 +1,10 @@
 //! This module exports the main `morph-rs` types.
 
 mod enums;
-mod features;
-
 pub use enums::*;
-pub use features::*;
+
+#[derive(Debug, Clone)]
+pub struct Command {
+    feature: FeatureKind,
+    data: Vec<u8>,
+}
