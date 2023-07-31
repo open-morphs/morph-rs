@@ -4,8 +4,9 @@
 mod enums;
 pub use enums::*;
 
+/// `Message` acts as the final representation of a BLE packet to the earbuds.
 #[derive(Debug, Clone)]
-pub struct Command {
+pub struct Message {
     feature: FeatureKind,
     data: Vec<u8>,
 }
