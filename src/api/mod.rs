@@ -1,4 +1,5 @@
 //! This module exports the main `morph-rs` types.
+#![allow(dead_code)]
 
 mod enums;
 pub use enums::*;
