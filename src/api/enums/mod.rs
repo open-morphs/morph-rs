@@ -13,16 +13,16 @@ pub use self::features::FeatureKind;
 pub enum EarbudsKind {
     /// V1 is the first iteration of the Morph BLE earbuds.
     MorphEarbudsV1,
-    /// Undefined.
+    /// Unselected model.
     #[default]
-    Undefined,
+    Unselected,
 }
 
 impl EarbudsKind {
     fn full_name(&self) -> &'static str {
         match *self {
             EarbudsKind::MorphEarbudsV1 => "Morph InfiniConnect v1",
-            EarbudsKind::Undefined => "Undefined model.", // default variant.
+            EarbudsKind::Unselected => "Unselected model.", // default variant.
         }
     }
 }
@@ -45,9 +45,9 @@ pub enum PduKind {
     Response = 0x10,
     /// Error PDU.
     Error = 0x11,
-    /// Default variant.
+    /// Unselected variant.
     #[default]
-    Undefined,
+    Unselected,
 }
 
 /// Enum of BLE vendors.

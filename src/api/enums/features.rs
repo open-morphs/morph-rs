@@ -22,5 +22,5 @@ pub enum FeatureKind {
     GetIsDeviceConnected = 0x06,
     /// Default variant.
     #[default]
-    Undefined,
+    Unselected,
 }
