@@ -7,7 +7,7 @@ mod features;
 
 pub use self::features::FeatureKind;
 
-/// Enum of different variants of the Morph Earbuds.
+/// Earbud variants.
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum EarbudsKind {
@@ -33,7 +33,7 @@ impl fmt::Display for EarbudsKind {
     }
 }
 
-/// Enum of BLE Protocol Data Unit types.
+/// BLE PDU (Protocol Data Unit) variants.
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum PduKind {
@@ -50,7 +50,7 @@ pub enum PduKind {
     Unselected,
 }
 
-/// Enum of BLE vendors.
+/// Bluetooth (/BLE) vendor variants.
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq)]
 #[repr(C)]
 pub enum VendorKind {
