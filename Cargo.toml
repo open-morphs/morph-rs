@@ -23,7 +23,7 @@ default = []
 btleplug = { version = "0.11.3", features = ["serde"] }
 futures = "0.3.30"
 serde = { version = "1.0.193", features = ["derive"] }
-tokio = { version = "1.35.0", features = ["full"] }
+tokio = { version = "1.35.1", features = ["full"] }
 uuid = { version = "1.6.1", features = ["v4"] }
 
 [target.'cfg(target_os = "linux")'.dependencies]
